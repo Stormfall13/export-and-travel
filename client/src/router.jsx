@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
-import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Login from "./pages/Login";
@@ -12,7 +11,7 @@ import AdminPage from "./pages/AdminPage";
 import About from './pages/About';
 import Destinations from './pages/Destinations';
 import Partners from './pages/Partners';
-import Header from "./components/Header";
+
 
 const AppRouter = () => {
     // console.log("Маршруты загружены");  // ✅ Проверяем, вызывается ли роутер

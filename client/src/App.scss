@@ -758,24 +758,27 @@ p{
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
+        position: fixed;
+        z-index: 1;
         top: 0;
         right: 0;
         background: var(--main-color); 
-        // z-index: 3;
         border-radius: 8px;
     }
     .close{
         display: block;
     }    
     .header{
+        position: inherit;
+        padding: 10px;
+        width: auto; 
         &__main-wrapp{
             width: 100%;
             justify-content: flex-start;
             gap: 15px;
         }
         .header__wrapp{
-            max-width: 233px;
+            max-width: 640px;
             .btn__wrapp{
                 max-width: 233px;
                 gap: 10px;
@@ -796,6 +799,7 @@ p{
                 background: rgb(251 143 29 / 87%);
                 transform: translate(100%);
                 transition: 0.6s;
+                z-index: 1;
                 .close{
                     width: 40px;
                     height: 40px;
@@ -848,6 +852,7 @@ p{
         display: none;
     }
     .explore{
+        padding-top: inherit !important;
         height: auto;
         &__wrapp-left{
             max-width: inherit;
@@ -908,6 +913,11 @@ p{
             max-width: inherit;
         }
     } 
+    .destinations,
+    .about,
+    .partners{
+        padding-top: inherit !important;
+    }
 }
 
 @media (max-width: 489px) {
@@ -948,9 +958,6 @@ p{
         }
     } 
     .featured{
-        &__wrapp-main{
-            
-        }
         &__wrapp{
             gap: 15px;
         }

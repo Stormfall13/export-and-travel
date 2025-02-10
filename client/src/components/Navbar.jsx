@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import AfterAuth from "./AfterAuth";
 
 import './navbar.css';
 
@@ -17,9 +16,9 @@ const Navbar = () => {
         navigate("/login");
     };
 
+
     return (
         <nav className="navbar__menu">
-            <Link to="/">Главная</Link>
 
             {/* Если пользователь авторизован, показываем "Личный кабинет" */}
             {user && (
@@ -31,7 +30,7 @@ const Navbar = () => {
             )}
 
             {/* Если пользователь — админ, показываем "Админку" */}
-            {user?.role === "admin" && <Link to="/admin">Админка</Link>}
+            {user?.role === "admin" && <Link className="admin__link" to="/admin">Админка</Link>}
 
             {/* Если пользователь не авторизован, показываем "Вход" и "Регистрация" */}
             {!user && (

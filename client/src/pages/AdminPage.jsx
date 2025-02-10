@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../store/slices/authSlice";
+
+
+import "./adminpage.css";
+import Header from "../components/Header";
 
 const AdminPage = () => {
     const [users, setUsers] = useState([]);
     const [editUser, setEditUser] = useState(null);
     const [formData, setFormData] = useState({ username: "", email: "", role: "", password: "" });
+
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
 
-    const handleLogout = () => {
-        dispatch(logout());
-        navigate("/login");
-    };
-
     useEffect(() => {
+
+        
         if (!token) {
             navigate("/login");
             return;
@@ -27,7 +26,7 @@ const AdminPage = () => {
         if (!user) return; // Ждём, пока загрузится пользователь
 
         if (user.role !== "admin") {
-            navigate("/"); // Нет прав — перенаправляем на главную
+            navigate("/");
             return;
         }
 
@@ -50,10 +49,32 @@ const AdminPage = () => {
         };
 
         fetchUsers();
+
+        const handleScreenSizeChangeAdaptive = () => {
+            const header = document.querySelector(".header");
+            if (header) {
+                const headerHeight = header.offsetHeight;
+                const explore = document.querySelector(".admin__container");
+                if (explore) {
+                explore.style.paddingTop = `${headerHeight}px`;
+                }
+            }
+            };
+        
+            // Вызываем при монтировании
+            handleScreenSizeChangeAdaptive();
+        
+            // Подписываемся на изменение размера окна
+            window.addEventListener("resize", handleScreenSizeChangeAdaptive);
+        
+            return () => {
+            // Отписываемся при размонтировании
+            window.removeEventListener("resize", handleScreenSizeChangeAdaptive);
+            };
     }, [token, user, navigate]);
 
     const deleteUser = async (id) => {
-        if (!window.confirm("Вы уверены, что хотите удалить пользователя?")) return;
+        if (!window.confirm("Удалить пользователя?")) return;
 
         try {
             const res = await fetch(`http://localhost:5000/api/admin/users/${id}`, {
@@ -65,7 +86,7 @@ const AdminPage = () => {
 
             if (!res.ok) throw new Error("Ошибка удаления");
 
-            setUsers(users.filter(user => user.id !== id));
+            setUsers(users.filter((user) => user.id !== id));
         } catch (error) {
             console.error("Ошибка:", error);
         }
@@ -81,7 +102,7 @@ const AdminPage = () => {
             const updatedData = { ...formData };
 
             if (!updatedData.password) {
-                delete updatedData.password; // Не отправляем, если пароль не изменён
+                delete updatedData.password;
             }
 
             const res = await fetch(`http://localhost:5000/api/admin/users/${editUser.id}`, {
@@ -107,25 +128,17 @@ const AdminPage = () => {
     }
 
     return (
-        <div className="admin-container">
-            <h1>Админ-панель</h1>
-            <button onClick={handleLogout}>Выйти</button>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Имя</th>
-                        <th>Email</th>
-                        <th>Роль</th>
-                        <th>Пароль</th>
-                        <th>Действия</th>
-                    </tr>
-                </thead>
-                <tbody>
+        <>
+            <Header className="admin__header" />
+            <div className="admin__container">
+                <h1>Админ-панель</h1>
+
+                <div className="users-list">
                     {users.map((user) => (
-                        <tr key={user.id}>
-                            <td>{user.id}</td>
-                            <td>
+                        <div className="user-card" key={user.id}>
+                            <p><strong>ID:</strong> {user.id}</p>
+
+                            <p><strong>Имя:</strong> 
                                 {editUser?.id === user.id ? (
                                     <input 
                                         type="text"
@@ -135,8 +148,9 @@ const AdminPage = () => {
                                 ) : (
                                     user.username
                                 )}
-                            </td>
-                            <td>
+                            </p>
+
+                            <p><strong>Email:</strong> 
                                 {editUser?.id === user.id ? (
                                     <input 
                                         type="email"
@@ -146,8 +160,9 @@ const AdminPage = () => {
                                 ) : (
                                     user.email
                                 )}
-                            </td>
-                            <td>
+                            </p>
+
+                            <p><strong>Роль:</strong> 
                                 {editUser?.id === user.id ? (
                                     <select value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })}>
                                         <option value="user">User</option>
@@ -156,8 +171,9 @@ const AdminPage = () => {
                                 ) : (
                                     user.role
                                 )}
-                            </td>
-                            <td>
+                            </p>
+
+                            <p><strong>Пароль:</strong> 
                                 {editUser?.id === user.id ? (
                                     <input 
                                         type="password"
@@ -168,8 +184,9 @@ const AdminPage = () => {
                                 ) : (
                                     "••••••"
                                 )}
-                            </td>
-                            <td>
+                            </p>
+
+                            <div className="user-card-actions">
                                 {editUser?.id === user.id ? (
                                     <>
                                         <button onClick={saveEdit}>Сохранить</button>
@@ -181,12 +198,12 @@ const AdminPage = () => {
                                         <button onClick={() => deleteUser(user.id)}>Удалить</button>
                                     </>
                                 )}
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
                     ))}
-                </tbody>
-            </table>
-        </div>
+                </div>
+            </div>
+        </>
     );
 };
 

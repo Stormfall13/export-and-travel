@@ -824,7 +824,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     top: 0;
     right: 0;
     background: var(--main-color);
@@ -833,13 +834,18 @@ p {
   .close {
     display: block;
   }
+  .header {
+    position: inherit;
+    padding: 10px;
+    width: auto;
+  }
   .header__main-wrapp {
     width: 100%;
     justify-content: flex-start;
     gap: 15px;
   }
   .header .header__wrapp {
-    max-width: 233px;
+    max-width: 640px;
   }
   .header .header__wrapp .btn__wrapp {
     max-width: 233px;
@@ -861,6 +867,7 @@ p {
     background: rgba(251, 143, 29, 0.87);
     transform: translate(100%);
     transition: 0.6s;
+    z-index: 1;
   }
   .header .header__wrapp .main__menu .close {
     width: 40px;
@@ -911,6 +918,7 @@ p {
     display: none;
   }
   .explore {
+    padding-top: inherit !important;
     height: auto;
   }
   .explore__wrapp-left {
@@ -960,6 +968,11 @@ p {
   }
   .footer__left-content {
     max-width: inherit;
+  }
+  .destinations,
+  .about,
+  .partners {
+    padding-top: inherit !important;
   }
 }
 @media (max-width: 489px) {

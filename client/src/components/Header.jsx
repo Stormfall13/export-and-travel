@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import AfterAuth from './AfterAuth';
 
 import burger from '../assets/burger.svg';
 import logo from '../assets/logo.png';
@@ -10,7 +9,6 @@ import Navbar from './Navbar';
 
 const Header = () => {
 
-    const [afterAuth, setAfterAuth] = useState(false);
     const [burgerOpened, setBurgerOpened] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 992);
   
