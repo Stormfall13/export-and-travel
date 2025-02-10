@@ -1,19 +1,32 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 import AfterAuth from "./AfterAuth";
+
+import './navbar.css';
 
 const Navbar = () => {
     const user = useSelector((state) => state.auth.user);
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate("/login");
+    };
+
     return (
-        <nav>
+        <nav className="navbar__menu">
             <Link to="/">Главная</Link>
 
             {/* Если пользователь авторизован, показываем "Личный кабинет" */}
             {user && (
                 <>
-                <AfterAuth />
                 <Link to="/user">Личный кабинет</Link>
+                <p>{user?.username || "Пользователь"}</p>
+                <button onClick={handleLogout}>Выйти</button>
                 </>
             )}
 

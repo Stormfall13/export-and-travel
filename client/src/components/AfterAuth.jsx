@@ -13,7 +13,7 @@ const AfterAuth = () => {
         dispatch(logout());
         navigate("/login");
     };
-    console.log(user);
+    // console.log(user);
     
 
   return (

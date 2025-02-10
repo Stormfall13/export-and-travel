@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import './partners.css';
+import Header from "../components/Header";
 
 const partners = [
   {
@@ -49,56 +50,59 @@ const Partners = () => {
   }, []);
   
   return (
-    <div className="partners">
-      <div className="container">
-        {/* Заголовок и описание */}
-        <h1 className="title">Наши партнёры</h1>
-        <p className="description">
-          Мы сотрудничаем с ведущими компаниями в сфере туризма и путешествий, 
-          чтобы предложить вам лучшие условия для незабываемых поездок.
-        </p>
+    <> 
+      <Header />
+      <div className="partners">
+        <div className="container">
+          {/* Заголовок и описание */}
+          <h1 className="title">Наши партнёры</h1>
+          <p className="description">
+            Мы сотрудничаем с ведущими компаниями в сфере туризма и путешествий, 
+            чтобы предложить вам лучшие условия для незабываемых поездок.
+          </p>
 
-        {/* Список партнёров */}
-        <div className="partners-list">
-          {partners.map((partner) => (
-            <div className="partner-card" key={partner.id}>
-              <img src={partner.logo} alt={partner.name} className="partner-logo" />
-              <h3 className="partner-name">{partner.name}</h3>
-              <p className="partner-description">{partner.description}</p>
-            </div>
-          ))}
-        </div>
+          {/* Список партнёров */}
+          <div className="partners-list">
+            {partners.map((partner) => (
+              <div className="partner-card" key={partner.id}>
+                <img src={partner.logo} alt={partner.name} className="partner-logo" />
+                <h3 className="partner-name">{partner.name}</h3>
+                <p className="partner-description">{partner.description}</p>
+              </div>
+            ))}
+          </div>
 
-        {/* Преимущества сотрудничества */}
-        <div className="benefits">
-          <h2 className="section-title">Почему стоит сотрудничать с нами?</h2>
-          <ul className="benefits-list">
-            <li>✅ Расширение аудитории и увеличение клиентов.</li>
-            <li>✅ Совместные маркетинговые акции и рекламные кампании.</li>
-            <li>✅ Доступ к эксклюзивным предложениям и скидкам.</li>
-            <li>✅ Возможность интеграции ваших сервисов на нашу платформу.</li>
-          </ul>
-        </div>
+          {/* Преимущества сотрудничества */}
+          <div className="benefits">
+            <h2 className="section-title">Почему стоит сотрудничать с нами?</h2>
+            <ul className="benefits-list">
+              <li>✅ Расширение аудитории и увеличение клиентов.</li>
+              <li>✅ Совместные маркетинговые акции и рекламные кампании.</li>
+              <li>✅ Доступ к эксклюзивным предложениям и скидкам.</li>
+              <li>✅ Возможность интеграции ваших сервисов на нашу платформу.</li>
+            </ul>
+          </div>
 
-        {/* Форма для заявки на партнёрство */}
-        <div className="partner-form">
-          <h2 className="section-title">Станьте нашим партнёром</h2>
-          <form>
-            <input type="text" placeholder="Название компании" required />
-            <input type="email" placeholder="Ваш email" required />
-            <textarea placeholder="Опишите, как мы можем сотрудничать" required></textarea>
-            <button type="submit">Отправить заявку</button>
-          </form>
-        </div>
+          {/* Форма для заявки на партнёрство */}
+          <div className="partner-form">
+            <h2 className="section-title">Станьте нашим партнёром</h2>
+            <form>
+              <input type="text" placeholder="Название компании" required />
+              <input type="email" placeholder="Ваш email" required />
+              <textarea placeholder="Опишите, как мы можем сотрудничать" required></textarea>
+              <button type="submit">Отправить заявку</button>
+            </form>
+          </div>
 
-        {/* Контакты */}
-        <div className="contact">
-          <h2 className="section-title">Свяжитесь с нами</h2>
-          <p>📧 Email: partners@travel.com</p>
-          <p>📍 Адрес: ул. Бизнеса, 15, Москва</p>
+          {/* Контакты */}
+          <div className="contact">
+            <h2 className="section-title">Свяжитесь с нами</h2>
+            <p>📧 Email: partners@travel.com</p>
+            <p>📍 Адрес: ул. Бизнеса, 15, Москва</p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

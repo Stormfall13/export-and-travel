@@ -10,6 +10,7 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         loginSuccess: (state, action) => {
+            console.log("User data in Redux:", action.payload);
             state.user = action.payload.user;
             state.token = action.payload.token;
             localStorage.setItem("user", JSON.stringify(action.payload.user));

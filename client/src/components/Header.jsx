@@ -54,22 +54,12 @@ const Header = () => {
                     )}
                     <ul>
                     <li><Link onClick={goToHome}>Home</Link></li>
-                    <li><Link to="destinations" onClick={() => setBurgerOpened(false)}>Destinations</Link></li>
-                    <li><Link to="about" onClick={() => setBurgerOpened(false)}>About</Link></li>
-                    <li><Link to="partners" onClick={() => setBurgerOpened(false)}>Partner</Link></li>
+                    <li><Link to="/destinations" onClick={() => setBurgerOpened(false)}>Destinations</Link></li>
+                    <li><Link to="/about" onClick={() => setBurgerOpened(false)}>About</Link></li>
+                    <li><Link to="/partners" onClick={() => setBurgerOpened(false)}>Partner</Link></li>
                     </ul>
                 </nav>
                 <Navbar />
-                {/* {afterAuth ? (
-                    <AfterAuth />
-                ) : (
-                    <div className="btn__wrapp">
-                        <Navbar />
-                        <Link to="login" className="login__btn">Login</Link>
-                        <Link to="register" className="register__btn">Register</Link>
-                    </div>
-                )} */}
-                
             </div> 
         </div>
     </header>

@@ -7,6 +7,8 @@ import bali from '../assets/bali.png';
 import nepal from '../assets/nepal.png';
 import tokio from '../assets/tokio.png';
 
+import Header from "../components/Header";
+
 const destinationsData = [
   {
     id: 1,
@@ -90,6 +92,8 @@ const Destinations = () => {
       : destinationsData.filter((destination) => destination.category === selectedCategory);
 
   return (
+    <>
+    <Header />
     <div className="destinations">
       <div className="container">
         <h1 className="title">Популярные направления</h1>
@@ -131,6 +135,7 @@ const Destinations = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 

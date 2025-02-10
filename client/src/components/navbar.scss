@@ -1,0 +1,43 @@
+.navbar__menu{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    a{
+        font-family: var(--font-inter);
+        font-weight: var(--medium);
+        font-size: 16px;
+        color: var(--text-color-second);
+    }
+    a:hover{
+        transition: 0.6s;
+        color: var(--text-color-black);
+    }
+    button{
+        font-family: var(--font-mulish);
+        font-weight: var(--bold);
+        font-size: 17px;
+        color: var(--text-color-white);
+        background: var(--main-color);
+        border-radius: 8px;
+        border: 1px solid transparent;
+        outline: none;
+        padding: 15px 60px;
+        transition: 0.6s;
+        cursor: pointer;
+    }
+    button:hover{
+        background: transparent;
+        border: 1px solid var(--main-color);
+        color: var(--main-color); 
+    }
+    p{
+        font-family: var(--font-inter);
+        font-weight: var(--semi-bold);
+        font-size: 22px;
+        color: var(--text-color-black); 
+        border: 2px solid var(--text-color-black);
+        border-radius: 8px;
+        padding: 11px 7px;
+    }
+}

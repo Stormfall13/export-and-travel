@@ -95,7 +95,7 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 670px;
+  max-width: 1020px;
   width: 100%;
 }
 .header .header__wrapp .main__menu {

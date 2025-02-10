@@ -47,7 +47,7 @@ const login = async (req, res) => {
         res.json({
             message: "Успешный вход",
             token,
-            user: { id: user.id, email: user.email, role: user.role } // 🔥 Добавляем user
+            user: { id: user.id, username: user.username , email: user.email, role: user.role } // 🔥 Добавляем user
         });
 
     } catch (error) {
