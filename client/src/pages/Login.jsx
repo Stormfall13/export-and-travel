@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { loginSuccess } from "../store/slices/authSlice";
 
 const Login = () => {
     const [form, setForm] = useState({ email: "", password: "" });
+    const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -24,6 +25,12 @@ const Login = () => {
             console.error("Ошибка входа:", error.response?.data?.message);
         }
     };
+
+    console.log(user);
+    if(user){
+        window.location.reload();
+    }
+    
 
     return (
         <div className="auth-container">

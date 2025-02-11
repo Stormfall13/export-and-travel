@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import React, { useState, useEffect } from "react";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import ScrollEffect from "./components/ScrollEffect";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -16,67 +17,6 @@ import Partners from './pages/Partners';
 const AppRouter = () => {
     // console.log("Маршруты загружены");  // ✅ Проверяем, вызывается ли роутер
 
-    const [isLargeScreen, setIsLargeScreen] = useState(window.matchMedia("(min-width: 992px)").matches);
-    
-    useEffect(() => {
-      const mediaQuery = window.matchMedia("(min-width: 992px)");
-      
-      const handleScreenSizeChange = (e) => {
-        setIsLargeScreen(e.matches);
-        
-        if (e.matches) {
-          let currentSection = 0;
-          const sections = document.querySelectorAll("section, footer");
-          const totalSections = sections.length;
-          let isScrolling = false;
-  
-          function scrollToSection(index) {
-            if (index < 0 || index >= totalSections) return;
-            isScrolling = true;
-            currentSection = index;
-            sections[index].scrollIntoView({ behavior: "smooth" });
-            setTimeout(() => (isScrolling = false), 600);
-          }
-  
-          window.addEventListener("wheel", (event) => {
-            if (isScrolling) return;
-            if (event.deltaY > 0) {
-              scrollToSection(currentSection + 1);
-            } else {
-              scrollToSection(currentSection - 1);
-            }
-          });
-  
-          const contents = document.querySelectorAll(
-            ".explore__wrapp-main, .way__wrapp-main, .featured__wrapp-main, .guides__wrapp-main, .testimonials__wrapp-main, .trending__wrapp-main, .footer__wrapp-main"
-          );
-  
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  entry.target.classList.add("visible");
-                  observer.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.3 }
-          );
-  
-          contents.forEach((content) => observer.observe(content));
-  
-          scrollToSection(0);
-        }
-      };
-  
-      mediaQuery.addEventListener("change", handleScreenSizeChange);
-      handleScreenSizeChange(mediaQuery);
-  
-      return () => {
-        mediaQuery.removeEventListener("change", handleScreenSizeChange);
-      };
-    }, []);
-  
     useEffect(() => {
       const mediaQueryAdaptive = window.matchMedia("(max-width: 992px)");
       
@@ -103,6 +43,7 @@ const AppRouter = () => {
 
     return (
         <Router>
+          <ScrollEffect />
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />

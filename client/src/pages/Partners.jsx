@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import './partners.css';
 import Header from "../components/Header";
+import Footer from '../components/Footer';
 
 const partners = [
   {
@@ -102,6 +103,7 @@ const Partners = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
